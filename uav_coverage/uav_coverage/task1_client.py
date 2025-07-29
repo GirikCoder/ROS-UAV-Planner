@@ -40,7 +40,7 @@ class Task1Client(Node):
 
     def display_uavs(self, uav_collection):
         """Display received UAVs"""
-        print(f"\n🚁 Received {uav_collection.count} UAVs:")
+        print(f"\n Received {uav_collection.count} UAVs:")
         print("=" * 50)
         
         for uav in uav_collection.uavs:
@@ -48,7 +48,7 @@ class Task1Client(Node):
 
     def check_intersections(self, uav_collection):
         """Check for coverage intersections"""
-        print(f"\n🔍 Checking for intersections:")
+        print(f"\n Checking for intersections:")
         print("-" * 30)
         
         intersections_found = False
@@ -58,11 +58,11 @@ class Task1Client(Node):
             distance = math.sqrt((uav2.x - uav1.x)**2 + (uav2.y - uav1.y)**2)
             
             if distance < (uav1.radius + uav2.radius):
-                print(f"⚠️  UAV {uav1.id} intersects with UAV {uav2.id} (distance: {distance:.1f})")
+                print(f"UAV {uav1.id} intersects with UAV {uav2.id} (distance: {distance:.1f})")
                 intersections_found = True
         
         if not intersections_found:
-            print("✅ No intersections found - Good coverage!")
+            print("No intersections found - Good coverage!")
         
         # Calculate coverage stats
         self.calculate_coverage_stats(uav_collection)
@@ -81,7 +81,7 @@ class Task1Client(Node):
         min_distance = min(distances)
         max_distance = max(distances)
         
-        print(f"\n📊 Coverage Statistics:")
+        print(f"\n Coverage Statistics:")
         print(f"   Average distance: {avg_distance:.1f}")
         print(f"   Minimum distance: {min_distance:.1f}")
         print(f"   Maximum distance: {max_distance:.1f}")

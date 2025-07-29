@@ -23,7 +23,7 @@ class Task2Visualizer(Node):
         # Display timer
         self.create_timer(2.0, self.display_status)  # Display every 2 seconds
         
-        self.get_logger().info("📺 Task 2 Visualizer started!")
+        self.get_logger().info(" Task 2 Visualizer started!")
 
     def uav_states_callback(self, msg: UAVCollection):
         """Update UAV states"""
@@ -39,8 +39,8 @@ class Task2Visualizer(Node):
             return
         
         print("\n" + "="*70)
-        print(f"🚁 DYNAMIC UAV STATUS - {len(self.current_uavs)} Active UAVs")
-        print(f"📊 Update #{self.update_counter} | Last update: {time.time() - self.last_update_time:.1f}s ago")
+        print(f" DYNAMIC UAV STATUS - {len(self.current_uavs)} Active UAVs")
+        print(f" Update #{self.update_counter} | Last update: {time.time() - self.last_update_time:.1f}s ago")
         print("="*70)
         
         # Display UAVs sorted by ID
@@ -71,7 +71,7 @@ class Task2Visualizer(Node):
         min_distance = min(distances)
         max_distance = max(distances)
         
-        print("\n📈 COVERAGE METRICS:")
+        print("\n COVERAGE METRICS:")
         print(f"   Average distance: {avg_distance:6.1f}")
         print(f"   Minimum distance: {min_distance:6.1f}")
         print(f"   Maximum distance: {max_distance:6.1f}")
@@ -79,11 +79,11 @@ class Task2Visualizer(Node):
         
         # Coverage quality indicator
         if intersections == 0:
-            print("   Quality: ✅ EXCELLENT (No overlaps)")
+            print("   Quality:  EXCELLENT (No overlaps)")
         elif intersections <= 2:
-            print("   Quality: 🟡 GOOD (Few overlaps)")
+            print("   Quality:  GOOD (Few overlaps)")
         else:
-            print("   Quality: 🔴 POOR (Many overlaps)")
+            print("   Quality:  POOR (Many overlaps)")
 
     def draw_ascii_map(self):
         """Simple ASCII visualization"""
@@ -107,7 +107,7 @@ class Task2Visualizer(Node):
             
             map_grid[y_pos][x_pos] = str(uav_id % 10)
         
-        print("\n🗺️  ASCII MAP:")
+        print("\n  ASCII MAP:")
         for row in map_grid:
             print(''.join(row))
         print(f"Scale: 1 char = {scale_x:.1f}x{scale_y:.1f} pixels")

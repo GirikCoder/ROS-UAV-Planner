@@ -30,8 +30,8 @@ class Task2Manager(Node):
         self.uav_radius = 50
         self.initial_uavs_received = False
         # Dynamic parameters
-        self.birth_rate = 0.15   # 10% chance per second
-        self.death_rate = 0.15  # 5% chance per second  
+        self.birth_rate = 0.15   # 15% chance per second
+        self.death_rate = 0.15  # 15% chance per second  
         self.min_uavs = 2
         self.max_uavs = 12
         
@@ -42,15 +42,15 @@ class Task2Manager(Node):
         self.birth_death_timer = None
         self.publish_timer = None
         
-        self.get_logger().info("🚁 Task 2 UAV Manager started!")
-        self.get_logger().info("⏳ Waiting for initial UAVs from Task 1...")
+        self.get_logger().info(" Task 2 UAV Manager started!")
+        self.get_logger().info(" Waiting for initial UAVs from Task 1...")
 
     def receive_initial_uavs_callback(self, msg: UAVCollection):
         """Receive initial UAVs from Task 1"""
         if self.initial_uavs_received:
             return  # Only accept initial UAVs once
         
-        self.get_logger().info(f"📥 Received {msg.count} initial UAVs from Task 1")
+        self.get_logger().info(f" Received {msg.count} initial UAVs from Task 1")
         
         # Clear any existing UAVs
         self.active_uavs.clear()
@@ -58,18 +58,18 @@ class Task2Manager(Node):
         # Add the UAVs from Task 1
         for uav in msg.uavs:
             self.active_uavs[uav.id] = uav
-            self.get_logger().info(f"📍 Initial UAV {uav.id} at ({uav.x:.0f}, {uav.y:.0f})")
+            self.get_logger().info(f" Initial UAV {uav.id} at ({uav.x:.0f}, {uav.y:.0f})")
         
         # Update next ID to avoid conflicts
         self.next_uav_id = max(self.active_uavs.keys()) + 1 if self.active_uavs else 0
         
         self.initial_uavs_received = True
-        self.get_logger().info("✅ Task 2 dynamic management started with initial UAVs!")
+        self.get_logger().info(" Task 2 dynamic management started with initial UAVs!")
 
         # NOW START THE TIMERS
         self.birth_death_timer = self.create_timer(1.0, self.birth_death_cycle)
         self.publish_timer = self.create_timer(0.2, self.publish_current_state)
-        self.get_logger().info("🔄 Dynamic birth/death cycle activated!")
+        self.get_logger().info(" Dynamic birth/death cycle activated!")
         
         # Trigger initial optimization
         self.trigger_optimization()
@@ -83,7 +83,7 @@ class Task2Manager(Node):
         uav.radius = float(self.uav_radius)
         
         self.active_uavs[self.next_uav_id] = uav
-        self.get_logger().info(f"🆕 UAV {self.next_uav_id} BORN at ({uav.x:.0f}, {uav.y:.0f})")
+        self.get_logger().info(f" UAV {self.next_uav_id} BORN at ({uav.x:.0f}, {uav.y:.0f})")
         self.next_uav_id += 1
         
         return uav
@@ -92,7 +92,7 @@ class Task2Manager(Node):
         """Remove UAV from system"""
         if uav_id in self.active_uavs:
             uav = self.active_uavs.pop(uav_id)
-            self.get_logger().info(f"💀 UAV {uav_id} DIED at ({uav.x:.0f}, {uav.y:.0f})")
+            self.get_logger().info(f" UAV {uav_id} DIED at ({uav.x:.0f}, {uav.y:.0f})")
             return True
         return False
 
@@ -119,7 +119,7 @@ class Task2Manager(Node):
         cmd.trigger_id = int(time.time() * 1000) % 10000  # Simple trigger ID
         
         self.optimize_trigger_publisher.publish(cmd)
-        self.get_logger().info(f"🔄 Triggered optimization for {len(self.active_uavs)} UAVs")
+        self.get_logger().info(f" Triggered optimization for {len(self.active_uavs)} UAVs")
 
     def publish_current_state(self):
         """Publish current UAV states"""
@@ -142,7 +142,7 @@ class Task2Manager(Node):
                 updates += 1
         
         if updates > 0:
-            self.get_logger().info(f"✅ Updated {updates} UAV positions")
+            self.get_logger().info(f" Updated {updates} UAV positions")
 
 
 def main(args=None):

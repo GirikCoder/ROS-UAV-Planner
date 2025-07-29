@@ -53,7 +53,7 @@ class Task1Server(Node):
         
         response.uav_list = uav_collection
         self.initial_uav_publisher.publish(uav_collection)
-        self.get_logger().info(f"📤 Published {count} initial UAVs for Task 2")
+        self.get_logger().info(f" Published {count} initial UAVs for Task 2")
         self.get_logger().info(f"Generated {count} UAVs successfully")
         return response
 

@@ -33,7 +33,7 @@ class Task2Optimizer(Node):
         self.boundary_force = 100.0
         self.step_size = 0.15
         
-        self.get_logger().info("🧮 Task 2 Position Optimizer ready!")
+        self.get_logger().info(" Task 2 Position Optimizer ready!")
 
     def uav_states_callback(self, msg: UAVCollection):
         """Store current UAV states"""
@@ -48,7 +48,7 @@ class Task2Optimizer(Node):
             optimized_positions = self.optimize_positions()
             self.publish_optimized_positions(optimized_positions)
         else:
-            self.get_logger().info("⏭️  Skipping optimization (< 2 UAVs)")
+            self.get_logger().info(" Skipping optimization (< 2 UAVs)")
 
     def optimize_positions(self) -> Dict[int, UAVInfo]:
         """Optimize UAV positions using force-based algorithm"""
@@ -93,7 +93,7 @@ class Task2Optimizer(Node):
             
             # Check convergence
             if max_displacement < self.convergence_threshold:
-                self.get_logger().info(f"✅ Converged after {iteration + 1} iterations")
+                self.get_logger().info(f" Converged after {iteration + 1} iterations")
                 break
         
         # Convert back to UAVInfo objects
@@ -166,7 +166,7 @@ class Task2Optimizer(Node):
         collection.uavs = list(optimized_uavs.values())
         
         self.optimized_positions_pub.publish(collection)
-        self.get_logger().info(f"📤 Published optimized positions for {len(optimized_uavs)} UAVs")
+        self.get_logger().info(f" Published optimized positions for {len(optimized_uavs)} UAVs")
 
 
 def main(args=None):
