@@ -1,0 +1,5 @@
+# Request
+int32 count
+---
+# Response
+UAVCollection uav_list
