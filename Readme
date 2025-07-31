@@ -1,0 +1,22 @@
+The Code is modified to incorporate requirements of Assignment-2
+
+Generic Feedback system:-
+1) A specific Generic Feedback class is created with Feedbacks as interface
+2) Interface is implemented by student and professor class
+3) option is added in student menu and professor menu for the same
+4) Student can give feedback in both form(String and rating)
+5) Anonymous feedbacks
+6) Prof can view and student can add feedbacks
+
+TA
+1) A TA class is created that inherits from children since TA is a Student
+2) TA has to be assigned first as student( Very important )
+3) prof assigns a TA (after that TA can get access to TA portal) after he has been assigned as prof
+4) TA manages and view grades only
+
+Exception Handling
+DropDeadlinePassedException : first admin sets a dead line(for dropping courses)
+In student user interface, when he drop course current date is checked with deadline and exception is handled by try-catch block
+Invalid_login : throws exception while performing login function if credentials are wrong
+CourseFullException : Their is attribute course_limit introduced which increments and decrements on adding and dropping
+if while adding limit exceed it throws error.
